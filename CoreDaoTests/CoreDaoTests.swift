@@ -10,7 +10,13 @@ import XCTest
 @testable import CoreDao
 
 class CoreDaoTests: XCTestCase {
-
+    
+    lazy var coreDataTest = CoreDao<Person>(with: "Person-1")
+    
+    func coreDataResponseCreate() {
+        XCTAssertNotNil(coreDataTest.context)
+    }
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
