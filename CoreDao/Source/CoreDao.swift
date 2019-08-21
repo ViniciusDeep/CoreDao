@@ -8,18 +8,6 @@
 
 import CoreData
 
-
-protocol DecodableDAO {
-    
-    associatedtype Element
-    typealias GenericElement = NSManagedObject
-    
-    func fetchAll() -> Element
-    func postObject(element: Element)
-    func deleteObject(element: GenericElement)
-    func putObject(element: GenericElement)
-}
-
 public class CoreDao<Element: NSManagedObject>: ConfigurableDao {
     
     public var context: NSManagedObjectContext
@@ -54,53 +42,13 @@ public class CoreDao<Element: NSManagedObject>: ConfigurableDao {
             do {
                 try context.save()
             } catch {
-                fatalError()
+                print(error)
             }
         }
     }
-    
-    
 }
 
 
-extension CoreDao: DecodableDAO {
-    func postObject(element: [Element]) {
-        
-    }
-    
-    func deleteObject(element: CoreDao.GenericElement) {
-        
-    }
-    
-    func putObject(element: CoreDao.GenericElement) {
-        
-    }
-}
 
-protocol ConfigurableService {
-    
-    typealias Element = Decodable
-    
-    
-    func post(object: [Element])
-    func fetch() -> [Element]?
-    func put(object: [Element])
-    func delete(object: [Element])
-}
 
-internal class Service: ConfigurableService {
-    func post(object: [Service.Element]) {
-    }
-    
-    func fetch() -> [Service.Element]? {
-        return nil
-    }
-    
-    func put(object: [Service.Element]) {
-        
-    }
-    
-    func delete(object: [Service.Element]) {
-        
-    }
-}
+

@@ -20,7 +20,6 @@
 		791C2C5422CAE3DB00B059A7 /* Person.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 791C2C5222CAE3DB00B059A7 /* Person.xcdatamodeld */; };
 		791C2C5722CAE44200B059A7 /* Person+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C2C5522CAE44200B059A7 /* Person+CoreDataClass.swift */; };
 		791C2C5822CAE44200B059A7 /* Person+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C2C5622CAE44200B059A7 /* Person+CoreDataProperties.swift */; };
-		7929E92122F06F6F00D8B5F9 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7929E92022F06F6F00D8B5F9 /* Service.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +50,6 @@
 		791C2C5322CAE3DB00B059A7 /* Person.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Person.xcdatamodel; sourceTree = "<group>"; };
 		791C2C5522CAE44200B059A7 /* Person+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataClass.swift"; sourceTree = "<group>"; };
 		791C2C5622CAE44200B059A7 /* Person+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Person+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7929E92022F06F6F00D8B5F9 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				791C2C5122CAE24100B059A7 /* Demo */,
-				791C2C4822CAD1E500B059A7 /* CoreDao */,
+				791C2C4822CAD1E500B059A7 /* Source */,
 				791C2C3422CAD1C000B059A7 /* Info.plist */,
 			);
 			path = CoreDao;
@@ -109,16 +107,15 @@
 			path = CoreDaoTests;
 			sourceTree = "<group>";
 		};
-		791C2C4822CAD1E500B059A7 /* CoreDao */ = {
+		791C2C4822CAD1E500B059A7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				791C2C4922CAD2BA00B059A7 /* ConfigurableDao.swift */,
 				791C2C4B22CAD67900B059A7 /* CoreDao.swift */,
 				791C2C4D22CAD7E700B059A7 /* CoreStack.swift */,
 				791C2C4F22CADFDF00B059A7 /* NSManagedObject+Extension.swift */,
-				7929E92022F06F6F00D8B5F9 /* Service.swift */,
 			);
-			path = CoreDao;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		791C2C5122CAE24100B059A7 /* Demo */ = {
@@ -244,7 +241,6 @@
 				791C2C4C22CAD67900B059A7 /* CoreDao.swift in Sources */,
 				791C2C4E22CAD7E700B059A7 /* CoreStack.swift in Sources */,
 				791C2C5022CADFDF00B059A7 /* NSManagedObject+Extension.swift in Sources */,
-				7929E92122F06F6F00D8B5F9 /* Service.swift in Sources */,
 				791C2C2B22CAD1BF00B059A7 /* ViewController.swift in Sources */,
 				791C2C2922CAD1BF00B059A7 /* AppDelegate.swift in Sources */,
 			);
