@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B4B68532322DA9500975BE9 /* CoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4B68522322DA9500975BE9 /* CoreError.swift */; };
 		791C2C2922CAD1BF00B059A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C2C2822CAD1BF00B059A7 /* AppDelegate.swift */; };
 		791C2C2B22CAD1BF00B059A7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791C2C2A22CAD1BF00B059A7 /* ViewController.swift */; };
 		791C2C2E22CAD1BF00B059A7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 791C2C2C22CAD1BF00B059A7 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1B4B68522322DA9500975BE9 /* CoreError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreError.swift; sourceTree = "<group>"; };
 		791C2C2522CAD1BF00B059A7 /* CoreDao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoreDao.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		791C2C2822CAD1BF00B059A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		791C2C2A22CAD1BF00B059A7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				791C2C4922CAD2BA00B059A7 /* ConfigurableDao.swift */,
+				1B4B68522322DA9500975BE9 /* CoreError.swift */,
 				791C2C4B22CAD67900B059A7 /* CoreDao.swift */,
 				791C2C4D22CAD7E700B059A7 /* CoreStack.swift */,
 				791C2C4F22CADFDF00B059A7 /* NSManagedObject+Extension.swift */,
@@ -241,6 +244,7 @@
 				791C2C4C22CAD67900B059A7 /* CoreDao.swift in Sources */,
 				791C2C4E22CAD7E700B059A7 /* CoreStack.swift in Sources */,
 				791C2C5022CADFDF00B059A7 /* NSManagedObject+Extension.swift in Sources */,
+				1B4B68532322DA9500975BE9 /* CoreError.swift in Sources */,
 				791C2C2B22CAD1BF00B059A7 /* ViewController.swift in Sources */,
 				791C2C2922CAD1BF00B059A7 /* AppDelegate.swift in Sources */,
 			);
