@@ -14,17 +14,25 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let person = personDao.new()
-//        person.name = "Vinicius"
-//        person.age = "20"
-//        personDao.insert(object: person)
-//
       
-        _ = personDao.new()
+        let person = personDao.new()
+        switch person {
+        case .success(let person):
+            person.name = "Example name"
+            person.age = "20"
+        case .failure(let error):
+            print("Something wrong. Error: \(error.localizedDescription)")
+        }
         
-        personDao.fetchAll().forEach { (person) in
-            print(person.name!)
-            print(person.age!)
+        let people = personDao.fetchAll()
+        switch people {
+        case .success(let people):
+            people.forEach { (person) in
+                print(person.name ?? "Undefined name")
+                print(person.age  ?? "Undefined age")
+            }
+        default:
+            print("Fail to fetch people")
         }
     }
 }
