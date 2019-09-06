@@ -12,38 +12,45 @@ public class CoreDao<Element: NSManagedObject>: ConfigurableDao {
     
     public var context: NSManagedObjectContext
     
-    init(with containerName: String) {
-        let coreStack = CoreStack(with: containerName)
+    init(with nameContainer: String) {
+        let coreStack = CoreStack(with: nameContainer)
         context = coreStack.persistentContainer.viewContext
     }
-    
-    public func new() -> Element {
-        return NSEntityDescription.insertNewObject(forEntityName: Element.className, into: context) as! Element
+        
+    func new() -> Result<Element, CoreError> {
+        guard let entity = NSEntityDescription.insertNewObject(forEntityName: Element.className, into: context) as? Element else {
+            return .failure(.undefinedNewObject)
+        }
+        return .success(entity)
     }
     
-    public func insert(object: Element) {
+    public func insert(object: Element) -> Result<Void, CoreError> {
         context.insert(object)
-        save()
+        return save()
     }
     
-    public func fetchAll() -> [Element] {
+    public func fetchAll() -> Result<[Element], CoreError> {
         let request = NSFetchRequest<Element>(entityName: Element.className)
-        let result = try! context.fetch(request)
-        return result
-    }
-    
-    public func delete(object: Element) {
-        context.delete(object)
-        save()
-    }
-    
-    public func save() {
+
         do {
-            do {
-                try context.save()
-            } catch {
-                print(error)
-            }
+            let result = try context.fetch(request)
+            return .success(result)
+        } catch {
+            return .failure(.fetchFail)
+        }
+    }
+    
+    public func delete(object: Element) -> Result<Void, CoreError> {
+        context.delete(object)
+        return save()
+    }
+    
+    public func save() -> Result<Void, CoreError> {
+        do {
+            try context.save()
+            return .success(())
+        } catch {
+            return .failure(.saveFail)
         }
     }
 }

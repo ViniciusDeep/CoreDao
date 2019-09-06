@@ -27,18 +27,18 @@ public class CoreStack {
         return container
     }()
     
-    public func saveContext() {
+    public func saveContext() -> Result<Void, CoreError> {
         let context = persistentContainer.viewContext
         
         if context.hasChanges {
             do {
                 try context.save()
             } catch {
-                fatalError()
+                return .failure(.saveContext)
             }
-            
         }
         
+        return .success(())
     }
     
 }

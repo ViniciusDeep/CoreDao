@@ -10,7 +10,9 @@ import Foundation
 
 protocol ConfigurableDao {
     associatedtype Object
-    func insert(object: Object)
-    func delete(object: Object)
-    func fetchAll() -> [Object]
+    func insert(object: Object) -> Result<Void, CoreError>
+    func delete(object: Object) -> Result<Void, CoreError>
+    func fetchAll() -> Result<[Object], CoreError>
+    func new() -> Result<Object, CoreError>
+    func save() -> Result<Void, CoreError>
 }
