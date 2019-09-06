@@ -20,16 +20,12 @@ class ViewController: UIViewController {
 //        personDao.insert(object: person)
 //
       
-        let people = personDao.new()
-        
+        _ = personDao.new()
         
         personDao.fetchAll().forEach { (person) in
             print(person.name!)
             print(person.age!)
         }
-        
-        personDao.postObject(element: [people])
-        
     }
 }
 
