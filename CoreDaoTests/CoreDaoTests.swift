@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import CoreData
 @testable import CoreDao
 
 class CoreDaoTests: XCTestCase {
@@ -51,6 +52,25 @@ class CoreDaoTests: XCTestCase {
         XCTAssertNotNil(coreDaoTest.fetchAll().filter({$0 == person}))
         coreDaoTest.delete(object: person)
         XCTAssertEqual([], coreDaoTest.fetchAll().filter({$0 == person}))
+    }
+    
+    func testCoreStack() {
+        let coreStack = CoreStack(with: "Person")
         
+        XCTAssertNotNil(coreStack)
+        
+        XCTAssertEqual(coreStack.nameContainer, "Person")
+        
+        coreStack.saveContext()
+        
+        XCTAssertNotNil(coreStack.persistentContainer)
+        
+        XCTAssertNotNil(coreStack)
+    }
+    
+    
+    func testClassNameAtNSMObject() {
+        class Stub: NSManagedObject {}
+        XCTAssertEqual(Stub.className, "Stub")
     }
 }
