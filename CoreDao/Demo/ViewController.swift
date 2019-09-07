@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     let personDao = CoreDao<Person>(with: "Person")
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 //        let person = personDao.new()
@@ -21,11 +21,6 @@ class ViewController: UIViewController {
 //
       
         _ = personDao.new()
-        
-        personDao.fetchAll().forEach { (person) in
-            print(person.name!)
-            print(person.age!)
-        }
     }
 }
 
