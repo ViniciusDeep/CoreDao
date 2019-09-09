@@ -7,34 +7,70 @@
 //
 
 import XCTest
+import CoreData
 @testable import CoreDao
 
 class CoreDaoTests: XCTestCase {
     
-    lazy var coreDataTest = CoreDao<Person>(with: "Person-1")
+    let coreDaoTest = CoreDao<Person>(with: "Person")
     
-    func coreDataResponseCreate() {
-        XCTAssertNotNil(coreDataTest.context)
+    func testCoreDataResponseCreate() {
+        XCTAssertNotNil(coreDaoTest.context)
     }
     
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    
+    func testCoreDaoCreate() {
+        let name = "Stub"
+        let age = "18"
+        let person = coreDaoTest.new()
+        person.name = name
+        person.age = age
+        coreDaoTest.save()
+        coreDaoTest.insert(object: person)
+        XCTAssertEqual(person.name, name)
+        XCTAssertEqual(person.age, age)
+        XCTAssertNotNil(person)
     }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testCoreDaoFetch() {
+        let people = coreDaoTest.fetchAll()
+        var specificPerson: Person?
+        people.forEach { (person) in
+            XCTAssertNotNil(person)
+            specificPerson = person
         }
+        let person = people.filter({$0 == specificPerson})
+        XCTAssertEqual(person.first, specificPerson)
     }
-
+    
+    
+    func testCoreDaoDelete() {
+        let person = coreDaoTest.new()
+        person.name = "Stub"
+        coreDaoTest.insert(object: person)
+        coreDaoTest.save()
+        XCTAssertNotNil(coreDaoTest.fetchAll().filter({$0 == person}))
+        coreDaoTest.delete(object: person)
+        XCTAssertEqual([], coreDaoTest.fetchAll().filter({$0 == person}))
+    }
+    
+    func testCoreStack() {
+        let coreStack = CoreStack(with: "Person")
+        
+        XCTAssertNotNil(coreStack)
+        
+        XCTAssertEqual(coreStack.nameContainer, "Person")
+        
+        coreStack.saveContext()
+        
+        XCTAssertNotNil(coreStack.persistentContainer)
+        
+        XCTAssertNotNil(coreStack)
+    }
+    
+    
+    func testClassNameAtNSMObject() {
+        class Stub: NSManagedObject {}
+        XCTAssertEqual(Stub.className, "Stub")
+    }
 }
