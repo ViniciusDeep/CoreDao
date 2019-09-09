@@ -14,7 +14,28 @@ public class CoreDao<Element: NSManagedObject>: ConfigurableDao {
     
     init(with nameContainer: String) {
         let coreStack = CoreStack(with: nameContainer)
-        context = coreStack.persistentContainer.viewContext
+        let context = coreStack.persistentContainer
+        
+        switch context {
+        case .success(let context):
+            self.context = context.viewContext
+        case .failure(let error):
+            fatalError("Fail to load context. Error: \(error)")
+        }
+    }
+
+    init?(with nameContainer: String, completion: (Result<Void, CoreError>) -> ()) {
+        let coreStack = CoreStack(with: nameContainer)
+        let context = coreStack.persistentContainer
+        
+        switch context {
+        case .success(let context):
+            self.context = context.viewContext
+            completion(.success(()))
+        case .failure(let error):
+            completion(.failure(error))
+            return nil
+        }
     }
         
     func new() -> Result<Element, CoreError> {
@@ -36,7 +57,7 @@ public class CoreDao<Element: NSManagedObject>: ConfigurableDao {
             let result = try context.fetch(request)
             return .success(result)
         } catch {
-            return .failure(.fetchFail)
+            return .failure(.fetch)
         }
     }
     
@@ -50,9 +71,10 @@ public class CoreDao<Element: NSManagedObject>: ConfigurableDao {
             try context.save()
             return .success(())
         } catch {
-            return .failure(.saveFail)
+            return .failure(.save)
         }
     }
+
 }
 
 

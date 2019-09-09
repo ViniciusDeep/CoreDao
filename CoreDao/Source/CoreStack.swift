@@ -16,29 +16,43 @@ public class CoreStack {
         self.nameContainer = nameContainer
     }
     
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: self.nameContainer)
+    lazy var persistentContainer: Result<NSPersistentContainer, CoreError> = {
+        let loadContainer : NSPersistentContainer? = NSPersistentContainer(name: self.nameContainer)
         
+        guard let container = loadContainer else {
+            return .failure(.containerNotFound)
+        }
+
+        var hasError: Bool = false
         container.loadPersistentStores(completionHandler: { (_, error) in
-            if let err = error {
-                fatalError()
+            if let _ = error {
+                hasError = true
             }
         })
-        return container
+        
+        if (hasError) {
+            return .failure(.loadPersistent)
+        }
+        return .success(container)
     }()
     
     public func saveContext() -> Result<Void, CoreError> {
-        let context = persistentContainer.viewContext
-        
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                return .failure(.saveContext)
+        switch persistentContainer {
+        case .success(let persistentContainer):
+            let persistentContainer = persistentContainer
+            let context = persistentContainer.viewContext
+            
+            if context.hasChanges {
+                do {
+                    try context.save()
+                } catch {
+                    return .failure(.saveContext)
+                }
             }
+            return .success(())
+        case .failure(let error):
+            return .failure(error)
         }
-        
-        return .success(())
     }
     
 }

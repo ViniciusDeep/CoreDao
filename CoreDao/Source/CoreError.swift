@@ -10,8 +10,9 @@ import Foundation
 
 public enum CoreError: Error {
     case containerNotFound
-    case saveFail
+    case loadPersistent
+    case save
     case undefinedNewObject
-    case fetchFail
+    case fetch
     case saveContext
 }
