@@ -10,16 +10,25 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let personDao = CoreDao<Person>(with: "Person")
+    lazy var personDao: CoreDao<Person>! = {
+        CoreDao<Person>(with: "Person") { result in
+            switch result{
+            case .success(let dao):
+                return dao
+            case .failure(_):
+                // Note: can be used as an optional and have its own treatment.
+                fatalError("Fail to get person dao")
+            }
+        }
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+    
         let person = personDao.new()
         switch person {
         case .success(let person):
-            person.name = "Example name"
-            person.age = "20"
+            addPerson(with: person)
         case .failure(let error):
             print("Something wrong. Error: \(error.localizedDescription)")
         }
@@ -35,5 +44,18 @@ class ViewController: UIViewController {
             print("Fail to fetch people")
         }
     }
+    
+    private func addPerson(with person: Person) {
+        person.name = "Example name"
+        person.age = "20"
+        let isSaved = personDao.save()
+        switch isSaved {
+        case .success(_):
+            print("Saved with success!")
+        case .failure(let error):
+            print("Fail to save user: \(error)")
+        }
+    }
+    
 }
 
